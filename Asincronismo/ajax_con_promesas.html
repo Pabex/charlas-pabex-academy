@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>AJAX con promesas</title>
+        <script type="text/javascript">
+            function solicitarDatos() {
+                return new Promise(function(resolve, reject) {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function(event) {
+                        if (this.readyState == 4 && this.status == 200) {
+                            resolve(this);
+                        }
+                    };
+                    xhttp.open("GET", "https://pabex.com.ar/");
+                    xhttp.send();
+                });
+            }
+
+            solicitarDatos().then(function(xhttp) {
+                var nodoRespuesta = document.createTextNode(xhttp.responseText);
+                document.body.appendChild(nodoRespuesta);
+            });
+        </script>
+    </head>
+    </body>
+        <h3>Ejemplo de petición AJAX con promesas</h3>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Ajax con async y await</title>
+        <script type="text/javascript">
+            async function solicitarDatos() {
+                var promesa = new Promise(function(resolve, reject) {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function(event) {
+                        if (this.readyState == 4 && this.status == 200) {
+                            resolve(this);
+                        }
+                    };
+                    xhttp.open("GET", "https://pabex.com.ar/");
+                    xhttp.send();
+                });
+                var resultado = await promesa;
+                var nodoRespuesta = document.createTextNode(resultado.responseText);
+                document.body.appendChild(nodoRespuesta);
+            }
+
+            solicitarDatos();
+            // Inmediatamente después de llamar a la función asincrónica, la ejecución continúa acá.
+        </script>
+    </head>
+    </body>
+        <h3>Ejemplo de petición AJAX con async y await</h3>
+    </body>
+</html>

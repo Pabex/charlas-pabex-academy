@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>AJAX con callbacks</title>
+        <script type="text/javascript">
+            function solicitarDatos(callbackExito) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function(event) {
+                    if (this.readyState == 4 && this.status == 200) {
+                        if (callbackExito !== null) {
+                            callbackExito(this);
+                        }
+                    }
+                };
+                xhttp.open("GET", "https://pabex.com.ar/");
+                xhttp.send();
+            }
+
+            solicitarDatos(function(xhttp) {
+                var nodoRespuesta = document.createTextNode(xhttp.responseText);
+                document.body.appendChild(nodoRespuesta);
+            });
+        </script>
+    </head>
+    <body>
+        <h3>Ejemplo de petición AJAX con callbacks</h3>
+        <pre id="respuesta"></pre>
+    </body>
+</html>
